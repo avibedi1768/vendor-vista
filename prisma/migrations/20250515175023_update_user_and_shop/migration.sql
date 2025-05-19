@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Shop" ALTER COLUMN "shopUrl" SET DEFAULT '',
+ALTER COLUMN "address" SET DEFAULT '';

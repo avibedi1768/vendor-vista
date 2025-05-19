@@ -34,3 +34,108 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# steps for the project:
+
+```
+npx create-next-app@latest
+```
+
+## prisma
+
+```
+npm install prisma --save-dev
+```
+
+```
+npx prisma init --datasource-provider postgresql
+```
+
+```
+npx prisma migrate dev --name init
+```
+
+```
+npm install @prisma/client
+```
+
+```
+npx prisma generate
+```
+
+## clerk
+
+```
+npm install @clerk/nextjs
+```
+
+## shadcn
+
+```
+npx shadcn@latest add progress
+```
+
+```
+npx shadcn@latest add card
+```
+
+```
+npx shadcn@latest add input
+```
+
+```
+npx shadcn@latest add button
+```
+
+```
+npx shadcn@latest add label
+```
+
+```
+npx shadcn@latest add alert
+```
+
+```
+npx shadcn@latest add select
+```
+
+```
+npx shadcn@latest add dialog
+```
+
+```
+npx shadcn@latest add toast
+```
+
+```
+npx shadcn@latest add alert-dialog
+```
+
+```
+npx shadcn@latest add sonner
+```
+
+## for webhook
+
+`npm i svix`
+`npm i localtunnel`
+
+## debounce
+
+```
+npm i usehooks-ts
+```
+
+## cloudinary
+
+```
+npm install next-cloudinary
+```
+
+`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="<Your Cloud Name>"`
+
+## nodemailer
+
+```
+npm install nodemailer
+```
