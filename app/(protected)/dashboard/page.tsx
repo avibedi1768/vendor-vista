@@ -233,7 +233,7 @@ function Page() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 text-sm rounded-full font-semibold ${
-                  order.status === "completed"
+                  order.status === "COMPLETED"
                     ? "bg-green-100 text-green-800"
                     : "bg-yellow-100 text-yellow-800"
                 }`}

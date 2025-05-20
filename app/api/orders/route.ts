@@ -61,7 +61,11 @@ export async function POST(req: Request) {
         );
       }
 
-      const itemTotal = productRecord.price.toNumber() * product.quantity;
+      const finalQuantity = Math.min(productRecord.stock, product.quantity);
+
+      if (finalQuantity === 0) continue;
+
+      const itemTotal = productRecord.price.toNumber() * finalQuantity;
       totalAmount += itemTotal;
 
       itemDetails.push({
@@ -69,6 +73,13 @@ export async function POST(req: Request) {
         price: productRecord.price.toNumber(),
         quantity: product.quantity,
         subTotal: itemTotal,
+      });
+
+      await prisma.product.update({
+        where: {
+          id: product.productId,
+        },
+        data: { stock: { decrement: finalQuantity } },
       });
     }
 

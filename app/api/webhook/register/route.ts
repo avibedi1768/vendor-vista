@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { Webhook } from "svix";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import { handleWebhookEvent } from "@/controllers/webhook.controller";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -34,5 +34,53 @@ export async function POST(req: Request) {
     return new Response("Invalid webhook signature", { status: 400 });
   }
 
-  return await handleWebhookEvent(evt);
+  const eventType = evt.type;
+
+  //logs
+  if (eventType === "user.created") {
+    try {
+      const {
+        id,
+        email_addresses,
+        primary_email_address_id,
+        first_name,
+        last_name,
+      } = evt.data;
+
+      const primaryEmail = email_addresses.find(
+        (email) => email.id === primary_email_address_id
+      );
+
+      if (!primaryEmail) {
+        return new Response("no primary email found", { status: 400 });
+      }
+
+      // check if user already exists
+      const existingUser = await prisma.user.findUnique({
+        where: { email: primaryEmail.email_address },
+      });
+
+      if (existingUser) {
+        console.log("user already exists");
+        return new Response("user already exists", { status: 200 });
+      }
+
+      const newUser = await prisma.user.create({
+        data: {
+          id,
+          email: primaryEmail.email_address,
+          firstName: first_name ?? "",
+          lastName: last_name ?? "",
+        },
+      });
+
+      console.log("user created", newUser);
+    } catch (error) {
+      return new Response(`error creating user in database: ${error}`, {
+        status: 500,
+      });
+    }
+  }
+
+  return new Response("webhook received successfully", { status: 200 });
 }

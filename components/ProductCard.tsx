@@ -14,13 +14,19 @@ function ProductCard({
   shopId: string;
 }) {
   const [count, setCount] = useState<number>(0);
+  const max = product.stock;
 
   useEffect(() => {
     const saved = localStorage.getItem(`cart-item-${shopId}-${product.id}`);
     if (saved) {
-      setCount(parseInt(saved.substring(0, saved.indexOf("$"))));
+      setCount(
+        Math.min(
+          product.stock,
+          parseInt(saved.substring(0, saved.indexOf("$")))
+        )
+      );
     }
-  }, [shopId, product.id]);
+  }, [shopId, product]);
 
   const updateCart = (newCount: number) => {
     setCount(newCount);
@@ -45,11 +51,15 @@ function ProductCard({
         className="rounded-t-2xl object-cover w-full h-48"
       />
 
-      <CardContent className="p-4">
-        <h3 className="text-lg font-semibold">{product.name}</h3>
-        <p className="text-sm text-gray-500 mt-1">
-          Rs.{product.price.toString()}
+      <CardContent className="p-5 space-y-2">
+        <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
+        <p className="text-base font-medium text-indigo-600">
+          ₹{product.price.toString()}
         </p>
+        <p className="text-sm text-gray-500 line-clamp-2 italic">
+          {product.description || "No description"}
+        </p>
+        <p className="text-xs text-gray-400">In stock: {product.stock}</p>
       </CardContent>
 
       <CardFooter className="p-4">
@@ -63,8 +73,13 @@ function ProductCard({
               -
             </Button>
             <span className="text-md font-medium">{count}</span>
-            <Button variant="outline" onClick={() => updateCart(count + 1)}>
-              +
+            <Button
+              variant="outline"
+              onClick={() => updateCart(count + 1)}
+              disabled={count >= max}
+              className="disabled:cursor-not-allowed disabled:text-red-600"
+            >
+              {count === max ? "x" : "+"}
             </Button>
           </div>
         )}

@@ -26,7 +26,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import { Pencil, PencilOff, Trash2 } from "lucide-react";
+import { Pencil, PencilOff, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
@@ -50,7 +50,7 @@ function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   // const [totalProducts, setTotalProducts] = useState<number>(0);
   // const [isLoading, setIsLoading] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -63,7 +63,7 @@ function Products() {
   const [productStocks, setProductStocks] = useState("");
 
   // const [debounceSearchTerm] = useDebounceValue(searchTerm, 300);
-  const [debounceSearchTerm] = useDebounceValue("", 300);
+  const [debounceSearchTerm] = useDebounceValue(searchTerm, 300);
 
   // list the products
   const fetchProducts = useCallback(
@@ -244,6 +244,19 @@ function Products() {
           Here are products of{" "}
           <span className="text-blue-600">{user?.firstName}</span>
         </h1>
+        
+        <div className="flex justify-center my-4">
+          <div className="relative w-full max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search products..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150"
+            />
+          </div>
+        </div>
 
         {products.length === 0 ? (
           <p className="text-gray-500 italic">No products found.</p>

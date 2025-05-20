@@ -25,7 +25,7 @@ model User {
   firstName String   @default("")
   lastName  String   @default("")
 
-  carts  Cart?
+  // carts  Cart?
   orders Order[]
 
   // shops     Shop[]
@@ -44,7 +44,7 @@ model Product {
   shopId String
   shop   Shop   @relation(fields: [shopId], references: [id])
 
-  cartItems  CartItem[]
+  // cartItems  CartItem[]
   orderItems OrderItem[]
   // inShops     ProductOnShop[]
 }
@@ -75,22 +75,22 @@ model Shop {
   productId Product[]
 }
 
-model Cart {
-  id         String     @id @default(uuid())
-  customerId String     @unique
-  createdAt  DateTime   @default(now())
-  customer   User       @relation(fields: [customerId], references: [id])
-  cartItems  CartItem[]
-}
+// model Cart {
+//   id         String     @id @default(uuid())
+//   customerId String     @unique
+//   createdAt  DateTime   @default(now())
+//   customer   User       @relation(fields: [customerId], references: [id])
+//   cartItems  CartItem[]
+// }
 
-model CartItem {
-  id        String  @id @default(uuid())
-  cartId    String
-  productId String
-  quantity  Int
-  cart      Cart    @relation(fields: [cartId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
-}
+// model CartItem {
+//   id        String  @id @default(uuid())
+//   cartId    String
+//   productId String
+//   quantity  Int
+//   cart      Cart    @relation(fields: [cartId], references: [id])
+//   product   Product @relation(fields: [productId], references: [id])
+// }
 
 model Order {
   id          String      @id @default(uuid())

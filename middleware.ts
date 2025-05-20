@@ -15,6 +15,15 @@ const publicRoutes = createRouteMatcher([
 export default clerkMiddleware(async (auth, request) => {
   const { userId } = await auth();
   const url = request.nextUrl.clone();
+  const pathname = url.pathname;
+
+  // Redirect any /signin/* or /signup/* deeper routes to homepage
+  if (
+    (pathname.startsWith("/signin/") && pathname !== "/signin") ||
+    (pathname.startsWith("/signup/") && pathname !== "/signup")
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
   // roles set up baad ch hunde aa. they need some time. is lyi aa use horya
   // Check if user just signed up (query param present)
