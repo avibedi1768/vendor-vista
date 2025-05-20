@@ -71,8 +71,8 @@ function Products() {
       try {
         // setIsLoading(true);
 
-        console.log("user: ", user);
-        console.log("userid = ", user?.id);
+        // console.log("user: ", user);
+        // console.log("userid = ", user?.id);
 
         const response = await fetch(
           `/api/products?page=${page}&search=${debounceSearchTerm}&userId=${user?.id}`
@@ -83,7 +83,7 @@ function Products() {
         }
 
         const data = await response.json();
-        console.log("products: ", data);
+        // console.log("products: ", data);
 
         setProducts(data.products);
         // setTotalProducts(data.totalProducts);
@@ -122,15 +122,16 @@ function Products() {
   // add products
   const handleAddProduct = async () => {
     try {
-      console.log("inside trycatch of add product (client");
+      // console.log("inside trycatch of add product (client");
 
       if (!image) {
-        console.error("no image selected");
+        // console.error("no image selected");
+        toast.error("No image selected");
         return;
       }
 
       if (isNaN(Number(price)) || isNaN(Number(stock))) {
-        console.error("Price and stock must be valid numbers");
+        toast.error("Price and stock must be valid numbers");
         return;
       }
 
@@ -143,7 +144,7 @@ function Products() {
       const file = image.get("file");
       if (file) formData.append("file", file);
       else {
-        console.log("no file in image");
+        toast.error("no file in image");
         return;
       }
 
@@ -214,6 +215,7 @@ function Products() {
       throw new Error("failed to update stock");
     }
 
+    seteditProductId(null);
     toast.success("Stock updated successfully");
     await fetchProducts(1);
   };
@@ -244,7 +246,7 @@ function Products() {
           Here are products of{" "}
           <span className="text-blue-600">{user?.firstName}</span>
         </h1>
-        
+
         <div className="flex justify-center my-4">
           <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />

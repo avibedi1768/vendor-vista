@@ -22,7 +22,7 @@ function Profile() {
 
   const getData = async () => {
     setIsLoading(true);
-    console.log("inside getdata");
+    // console.log("inside getdata");
 
     try {
       const response = await fetch(`/api/profile`);
@@ -39,7 +39,7 @@ function Profile() {
       if (data.user.address) setAddress(data.user.address);
       if (data.user.avatar) setAvatar(data.user.avatar);
 
-      console.log("data", data);
+      // console.log("data", data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -72,7 +72,7 @@ function Profile() {
   const handleChange = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log("inside handleChange");
+    // console.log("inside handleChange");
 
     try {
       const formData = new FormData();
@@ -89,7 +89,7 @@ function Profile() {
         body: formData,
       });
 
-      console.log("response", response);
+      // console.log("response", response);
 
       if (!response.ok) {
         throw new Error("failed to update profile");

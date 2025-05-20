@@ -10,14 +10,17 @@ export async function GET() {
     return NextResponse.json({ error: "unauthorised" }, { status: 401 });
   }
 
-  console.log("userId", userId);
+  // console.log("userId", userId);
 
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     return NextResponse.json({ user, status: 200 });
   } catch (error) {
-    console.error("error getting user", error);
-    return NextResponse.json({ error: "error getting user" }, { status: 500 });
+    // console.error("error getting user", error);
+    return NextResponse.json(
+      { error: `error getting user ${error}` },
+      { status: 500 }
+    );
   }
 }
 
@@ -35,13 +38,13 @@ interface CloudinaryUploadResult {
 
 export async function PUT(req: NextRequest) {
   const { userId } = await auth();
-  console.log("checking user");
+  // console.log("checking user");
 
   if (!userId) {
     return NextResponse.json({ error: "unauthorised" }, { status: 401 });
   }
 
-  console.log("checked user");
+  // console.log("checked user");
 
   try {
     const formData = await req.formData();
@@ -92,11 +95,14 @@ export async function PUT(req: NextRequest) {
       });
     }
 
-    console.log(updatedUser);
+    // console.log(updatedUser);
 
     return NextResponse.json({ updatedUser, status: 200 });
   } catch (error) {
-    console.error("error updating user", error);
-    return NextResponse.json({ error: "error updating user" }, { status: 500 });
+    // console.error("error updating user", error);
+    return NextResponse.json(
+      { error: `error updating user ${error}` },
+      { status: 500 }
+    );
   }
 }

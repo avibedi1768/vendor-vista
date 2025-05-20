@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
 
 function Page() {
   const { user, isLoaded } = useUser();
@@ -54,7 +55,7 @@ function Page() {
       }
 
       const data = await response.json();
-      console.log("shop data: ", data);
+      // console.log("shop data: ", data);
 
       if (data.shop.address) setAddress(data.shop.address);
       if (data.shop.name) setShopName(data.shop.name);
@@ -71,7 +72,7 @@ function Page() {
         url.substring(0, url.indexOf("/admin")) + "/shop/" + user?.id;
 
       setShopUrl(baseUrl);
-      console.log("shopurl", shopUrl);
+      // console.log("shopurl", shopUrl);
 
       getData();
     }
@@ -81,6 +82,8 @@ function Page() {
     await navigator.clipboard.writeText(shopUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); //reset color after 2 secs
+
+    toast.success("shop url copied to clipboard");
   };
 
   const handleShopChanges = async (e: React.FormEvent) => {
@@ -104,7 +107,7 @@ function Page() {
       }
 
       await getData();
-      alert("shop data updated");
+      toast.success("shop data updated");
     } catch (error) {
       console.error(error);
     }
@@ -142,6 +145,9 @@ function Page() {
           className="text-blue-600 hover:underline text-lg"
         >
           🛍️ Products
+        </Link>
+        <Link href="/shop" className="text-blue-600 hover:underline text-lg">
+          Browse Shops
         </Link>
       </div>
 

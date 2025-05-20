@@ -1,14 +1,18 @@
 "use client";
 
+import { Progress } from "@/components/ui/progress";
 // import { CardHeader } from "@/components/ui/card";
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 // import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface PastOrderProps {
   id: string;
   createdAt: string;
   shop: {
+    id: string;
     address: string;
     name: string;
   };
@@ -26,7 +30,7 @@ interface PastOrderProps {
 }
 
 function Page() {
-  // const { user } = useUser();
+  const { isLoaded } = useUser();
 
   const [firstName, setFirstName] = useState("");
   const [firstNameInHeading, setFirstNameInHeading] = useState("");
@@ -56,7 +60,7 @@ function Page() {
       if (!response.ok) throw new Error("failed to fetch user data");
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (data.user.firstName) setFirstName(data.user.firstName);
       if (data.user.firstName) setFirstNameInHeading(data.user.firstName);
@@ -69,7 +73,7 @@ function Page() {
   };
 
   const getUserOrders = async () => {
-    console.log("loading user orders in future");
+    // console.log("loading user orders in future");
 
     try {
       const response = await fetch(`/api/orders`);
@@ -79,7 +83,7 @@ function Page() {
       }
 
       const data = await response.json();
-      console.log("past orders", data);
+      // console.log("past orders", data);
 
       setPastOrders(data.orders);
     } catch (error) {
@@ -115,20 +119,36 @@ function Page() {
         throw new Error("failed to update profile");
       }
 
+      toast.success("profile updated");
       await getUserData();
     } catch (error) {
       console.error(error);
     }
   };
 
-  return (
+  return !isLoaded ? (
+    <div className="flex flex-col items-center justify-center h-[70vh] gap-4 animate-pulse text-center">
+      <div className="text-3xl font-semibold text-blue-600">
+        Loading your dashboard...
+      </div>
+      <Progress value={33} className="w-64 h-3 rounded-full bg-gray-200" />
+      <p className="text-sm text-muted-foreground">Please wait a moment.</p>
+    </div>
+  ) : (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">
         Dashboard of {firstNameInHeading}
       </h1>
 
-      <div className="flex justify-end">
-        <div className="w-fit bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition duration-300 cursor-pointer">
+      <div className="flex justify-end items-center gap-6 p-4  ">
+        <Link
+          href="/shop"
+          className="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer"
+        >
+          Browse Shops
+        </Link>
+
+        <div className="w-fit bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 rounded-lg shadow-md transition duration-300 cursor-pointer">
           <SignOutButton redirectUrl="/" />
         </div>
       </div>
@@ -211,6 +231,12 @@ function Page() {
               <p className="font-medium">Shop:</p>
               <p className="text-gray-700">{order.shop.name}</p>
               <p className="text-gray-500 text-sm">{order.shop.address}</p>
+              <Link
+                className="text-blue-500 text-sm underline"
+                href={`/shop/${order.shop.id}`}
+              >
+                View Shop
+              </Link>
             </div>
 
             <div className="mt-4">

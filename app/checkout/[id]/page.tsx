@@ -7,9 +7,14 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
+import { Progress } from "@/components/ui/progress";
 
 function CheckoutIndividual() {
   // call orders api from this. and create an order. and send email to user and shop owner (vendor) about the order details.
+
+  const { isLoaded } = useUser();
+
   const params = useParams();
   const shopId = params.id;
 
@@ -295,7 +300,15 @@ function CheckoutIndividual() {
     setIsEditing(false);
   };
 
-  return (
+  return !isLoaded ? (
+    <div className="flex flex-col items-center justify-center h-[70vh] gap-4 animate-pulse text-center">
+      <div className="text-3xl font-semibold text-blue-600">
+        Loading Checkout...
+      </div>
+      <Progress value={33} className="w-64 h-3 rounded-full bg-gray-200" />
+      <p className="text-sm text-muted-foreground">Please wait a moment.</p>
+    </div>
+  ) : (
     <div className="max-w-3xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-center mb-8">
         Checkout for <span className="text-blue-600">{shopInfo?.name}</span>{" "}

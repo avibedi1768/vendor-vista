@@ -10,8 +10,12 @@ import { Search } from "lucide-react";
 
 // debounce -> when user is typing, wait for some time (eg: 300ms) before sending the request. usually we send request at every typed word.
 import { useDebounceValue } from "usehooks-ts";
+import { useUser } from "@clerk/nextjs";
+import { Progress } from "@/components/ui/progress";
 
 function ShopId() {
+  const { isLoaded } = useUser();
+
   const params = useParams();
   const shopId = params.id as string;
   const [products, setProducts] = useState<Product[]>([]);
@@ -27,7 +31,7 @@ function ShopId() {
     if (!response.ok) throw new Error("failed to fetch shop details");
 
     const data = await response.json();
-    console.log("shop data", data);
+    // console.log("shop data", data);
 
     if (data.shop.address) setAddress(data.shop.address);
     if (data.shop.name) setShopName(data.shop.name);
@@ -42,7 +46,7 @@ function ShopId() {
       if (!response.ok) throw new Error("failed to fetch products");
 
       const data = await response.json();
-      console.log("prods", data);
+      // console.log("prods", data);
       setProducts(data.products);
     } catch (error) {
       console.error(error);
@@ -53,7 +57,15 @@ function ShopId() {
     getShopDetails();
     getShopProducts();
   }, [getShopDetails, getShopProducts]);
-  return (
+  return !isLoaded ? (
+    <div className="flex flex-col items-center justify-center h-[70vh] gap-4 animate-pulse text-center">
+      <div className="text-3xl font-semibold text-blue-600">
+        Loading the shop...
+      </div>
+      <Progress value={33} className="w-64 h-3 rounded-full bg-gray-200" />
+      <p className="text-sm text-muted-foreground">Please wait a moment.</p>
+    </div>
+  ) : (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
@@ -102,6 +114,13 @@ function ShopId() {
           className="inline-block rounded-lg border border-gray-300 px-6 py-2 hover:bg-gray-100 hover:text-gray-800 transition"
         >
           go back to user profile
+        </Link>
+
+        <Link
+          href={`/shop`}
+          className="inline-block rounded-lg bg-blue-500 text-white px-6 py-2 hover:bg-blue-700 transition"
+        >
+          Browse Shops
         </Link>
       </div>
     </div>

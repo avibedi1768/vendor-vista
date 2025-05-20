@@ -36,14 +36,14 @@ export async function GET(req: NextRequest) {
       where: { shopId: userId },
     });
 
-    console.log("inside get products", products, totalProducts, userId);
+    // console.log("inside get products", products, totalProducts, userId);
 
     return NextResponse.json({ products, totalProducts });
   } catch (error) {
-    console.error("error getting products", error);
+    // console.error("error getting products", error);
 
     return NextResponse.json(
-      { error: "internal server error" },
+      { error: `internal server error ${error}` },
       { status: 500 }
     );
   }
@@ -64,7 +64,7 @@ interface CloudinaryUploadResult {
 // create new product
 export async function POST(req: NextRequest) {
   const { userId } = await auth();
-  console.log("inside post products function");
+  // console.log("inside post products function");
 
   if (!userId) {
     return NextResponse.json({ error: "unauthorised" }, { status: 401 });
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
 
   const user = await prisma.user.findUnique({ where: { id: userId } });
 
-  console.log(user);
+  // console.log(user);
 
   if (!user) {
     return NextResponse.json({ error: "user not found" }, { status: 404 });
@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    console.log("public_id of image: ", result.public_id);
+    // console.log("public_id of image: ", result.public_id);
 
     // create product (rest stuff)
     // const { name, description, price, stock } = await req.json();

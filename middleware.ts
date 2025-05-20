@@ -19,8 +19,8 @@ export default clerkMiddleware(async (auth, request) => {
 
   // Redirect any /signin/* or /signup/* deeper routes to homepage
   if (
-    (pathname.startsWith("/signin/") && pathname !== "/signin") ||
-    (pathname.startsWith("/signup/") && pathname !== "/signup")
+    (pathname.startsWith("/signin") && pathname !== "/signin") ||
+    (pathname.startsWith("/signup") && pathname !== "/signup")
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }

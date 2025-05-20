@@ -30,8 +30,10 @@ export async function POST(req: Request) {
       "svix-signature": svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    console.error("Webhook verification failed", err);
-    return new Response("Invalid webhook signature", { status: 400 });
+    // console.error("Webhook verification failed", err);
+    return new Response(`Invalid webhook signature. error: ${err}`, {
+      status: 400,
+    });
   }
 
   const eventType = evt.type;
@@ -61,11 +63,11 @@ export async function POST(req: Request) {
       });
 
       if (existingUser) {
-        console.log("user already exists");
+        // console.log("user already exists");
         return new Response("user already exists", { status: 200 });
       }
 
-      const newUser = await prisma.user.create({
+      await prisma.user.create({
         data: {
           id,
           email: primaryEmail.email_address,
@@ -74,7 +76,7 @@ export async function POST(req: Request) {
         },
       });
 
-      console.log("user created", newUser);
+      // console.log("user created", newUser);
     } catch (error) {
       return new Response(`error creating user in database: ${error}`, {
         status: 500,

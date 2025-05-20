@@ -186,7 +186,7 @@ function Signup() {
           const url = new URL(window.location.href);
           const redirectParam = url.searchParams.get("redirect_url");
 
-          console.log("redirected path = ", redirectParam);
+          // console.log("redirected path = ", redirectParam);
 
           // came from some shop. go back to that shop
           if (redirectParam) router.push(`/${redirectParam}`);

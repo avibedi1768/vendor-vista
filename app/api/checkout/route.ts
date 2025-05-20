@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    console.log("inside checkout get api");
+    // console.log("inside checkout get api");
 
     const { productIds, shopId } = await req.json();
 
@@ -67,9 +67,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ vendor }, { status: 200 });
   } catch (error) {
-    console.error("error getting vendor info", error);
+    // console.error("error getting vendor info", error);
     return NextResponse.json(
-      { error: "error getting vendor info" },
+      { error: `error getting vendor info ${error}` },
       { status: 500 }
     );
   }

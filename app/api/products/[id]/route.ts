@@ -33,10 +33,10 @@ export async function DELETE(req: NextRequest) {
       status: 200,
     });
   } catch (error) {
-    console.error("error deleting product", error);
+    // console.error("error deleting product", error);
 
     return NextResponse.json(
-      { error: "failed to delete product" },
+      { error: `failed to delete product ${error}` },
       { status: 500 }
     );
   }
@@ -79,10 +79,10 @@ export async function PUT(req: NextRequest) {
       status: 200,
     });
   } catch (error) {
-    console.error("error updating stocks of product", error);
+    // console.error("error updating stocks of product", error);
 
     return NextResponse.json(
-      { error: "failed to update stocks of product" },
+      { error: `failed to update stocks of product ${error}` },
       { status: 500 }
     );
   }

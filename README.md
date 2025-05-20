@@ -139,3 +139,11 @@ npm install next-cloudinary
 ```
 npm install nodemailer
 ```
+
+## project link:
+
+```
+https://vendor-vista.vercel.app
+```
+
+dont open!!
