@@ -53,8 +53,7 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const Status: {
   PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED'
+  COMPLETED: 'COMPLETED'
 };
 
 export type Status = (typeof Status)[keyof typeof Status]
@@ -1410,7 +1409,6 @@ export namespace Prisma {
     email: string | null
     role: $Enums.Role | null
     address: string | null
-    avatar: string | null
     createdAt: Date | null
     updatedAt: Date | null
     firstName: string | null
@@ -1422,7 +1420,6 @@ export namespace Prisma {
     email: string | null
     role: $Enums.Role | null
     address: string | null
-    avatar: string | null
     createdAt: Date | null
     updatedAt: Date | null
     firstName: string | null
@@ -1434,7 +1431,6 @@ export namespace Prisma {
     email: number
     role: number
     address: number
-    avatar: number
     createdAt: number
     updatedAt: number
     firstName: number
@@ -1448,7 +1444,6 @@ export namespace Prisma {
     email?: true
     role?: true
     address?: true
-    avatar?: true
     createdAt?: true
     updatedAt?: true
     firstName?: true
@@ -1460,7 +1455,6 @@ export namespace Prisma {
     email?: true
     role?: true
     address?: true
-    avatar?: true
     createdAt?: true
     updatedAt?: true
     firstName?: true
@@ -1472,7 +1466,6 @@ export namespace Prisma {
     email?: true
     role?: true
     address?: true
-    avatar?: true
     createdAt?: true
     updatedAt?: true
     firstName?: true
@@ -1557,7 +1550,6 @@ export namespace Prisma {
     email: string
     role: $Enums.Role
     address: string
-    avatar: string | null
     createdAt: Date
     updatedAt: Date
     firstName: string
@@ -1586,7 +1578,6 @@ export namespace Prisma {
     email?: boolean
     role?: boolean
     address?: boolean
-    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     firstName?: boolean
@@ -1601,7 +1592,6 @@ export namespace Prisma {
     email?: boolean
     role?: boolean
     address?: boolean
-    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     firstName?: boolean
@@ -1613,7 +1603,6 @@ export namespace Prisma {
     email?: boolean
     role?: boolean
     address?: boolean
-    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     firstName?: boolean
@@ -1625,14 +1614,13 @@ export namespace Prisma {
     email?: boolean
     role?: boolean
     address?: boolean
-    avatar?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     firstName?: boolean
     lastName?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "role" | "address" | "avatar" | "createdAt" | "updatedAt" | "firstName" | "lastName", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "role" | "address" | "createdAt" | "updatedAt" | "firstName" | "lastName", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | User$ordersArgs<ExtArgs>
     shop?: boolean | User$shopArgs<ExtArgs>
@@ -1652,7 +1640,6 @@ export namespace Prisma {
       email: string
       role: $Enums.Role
       address: string
-      avatar: string | null
       createdAt: Date
       updatedAt: Date
       firstName: string
@@ -2086,7 +2073,6 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly address: FieldRef<"User", 'String'>
-    readonly avatar: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly firstName: FieldRef<"User", 'String'>
@@ -3721,6 +3707,7 @@ export namespace Prisma {
     address: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    image: string | null
   }
 
   export type ShopMaxAggregateOutputType = {
@@ -3729,6 +3716,7 @@ export namespace Prisma {
     address: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    image: string | null
   }
 
   export type ShopCountAggregateOutputType = {
@@ -3737,6 +3725,7 @@ export namespace Prisma {
     address: number
     createdAt: number
     updatedAt: number
+    image: number
     _all: number
   }
 
@@ -3747,6 +3736,7 @@ export namespace Prisma {
     address?: true
     createdAt?: true
     updatedAt?: true
+    image?: true
   }
 
   export type ShopMaxAggregateInputType = {
@@ -3755,6 +3745,7 @@ export namespace Prisma {
     address?: true
     createdAt?: true
     updatedAt?: true
+    image?: true
   }
 
   export type ShopCountAggregateInputType = {
@@ -3763,6 +3754,7 @@ export namespace Prisma {
     address?: true
     createdAt?: true
     updatedAt?: true
+    image?: true
     _all?: true
   }
 
@@ -3844,6 +3836,7 @@ export namespace Prisma {
     address: string
     createdAt: Date
     updatedAt: Date
+    image: string | null
     _count: ShopCountAggregateOutputType | null
     _min: ShopMinAggregateOutputType | null
     _max: ShopMaxAggregateOutputType | null
@@ -3869,6 +3862,7 @@ export namespace Prisma {
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
     orders?: boolean | Shop$ordersArgs<ExtArgs>
     vendor?: boolean | UserDefaultArgs<ExtArgs>
     productId?: boolean | Shop$productIdArgs<ExtArgs>
@@ -3881,6 +3875,7 @@ export namespace Prisma {
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
     vendor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shop"]>
 
@@ -3890,6 +3885,7 @@ export namespace Prisma {
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
     vendor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shop"]>
 
@@ -3899,9 +3895,10 @@ export namespace Prisma {
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
   }
 
-  export type ShopOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["shop"]>
+  export type ShopOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "createdAt" | "updatedAt" | "image", ExtArgs["result"]["shop"]>
   export type ShopInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | Shop$ordersArgs<ExtArgs>
     vendor?: boolean | UserDefaultArgs<ExtArgs>
@@ -3928,6 +3925,7 @@ export namespace Prisma {
       address: string
       createdAt: Date
       updatedAt: Date
+      image: string | null
     }, ExtArgs["result"]["shop"]>
     composites: {}
   }
@@ -4359,6 +4357,7 @@ export namespace Prisma {
     readonly address: FieldRef<"Shop", 'String'>
     readonly createdAt: FieldRef<"Shop", 'DateTime'>
     readonly updatedAt: FieldRef<"Shop", 'DateTime'>
+    readonly image: FieldRef<"Shop", 'String'>
   }
     
 
@@ -7070,7 +7069,6 @@ export namespace Prisma {
     email: 'email',
     role: 'role',
     address: 'address',
-    avatar: 'avatar',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     firstName: 'firstName',
@@ -7099,7 +7097,8 @@ export namespace Prisma {
     name: 'name',
     address: 'address',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    image: 'image'
   };
 
   export type ShopScalarFieldEnum = (typeof ShopScalarFieldEnum)[keyof typeof ShopScalarFieldEnum]
@@ -7265,7 +7264,6 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     address?: StringFilter<"User"> | string
-    avatar?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     firstName?: StringFilter<"User"> | string
@@ -7279,7 +7277,6 @@ export namespace Prisma {
     email?: SortOrder
     role?: SortOrder
     address?: SortOrder
-    avatar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     firstName?: SortOrder
@@ -7296,7 +7293,6 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     role?: EnumRoleFilter<"User"> | $Enums.Role
     address?: StringFilter<"User"> | string
-    avatar?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     firstName?: StringFilter<"User"> | string
@@ -7310,7 +7306,6 @@ export namespace Prisma {
     email?: SortOrder
     role?: SortOrder
     address?: SortOrder
-    avatar?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     firstName?: SortOrder
@@ -7328,7 +7323,6 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     address?: StringWithAggregatesFilter<"User"> | string
-    avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     firstName?: StringWithAggregatesFilter<"User"> | string
@@ -7419,6 +7413,7 @@ export namespace Prisma {
     address?: StringFilter<"Shop"> | string
     createdAt?: DateTimeFilter<"Shop"> | Date | string
     updatedAt?: DateTimeFilter<"Shop"> | Date | string
+    image?: StringNullableFilter<"Shop"> | string | null
     orders?: OrderListRelationFilter
     vendor?: XOR<UserScalarRelationFilter, UserWhereInput>
     productId?: ProductListRelationFilter
@@ -7430,6 +7425,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrderInput | SortOrder
     orders?: OrderOrderByRelationAggregateInput
     vendor?: UserOrderByWithRelationInput
     productId?: ProductOrderByRelationAggregateInput
@@ -7444,6 +7440,7 @@ export namespace Prisma {
     address?: StringFilter<"Shop"> | string
     createdAt?: DateTimeFilter<"Shop"> | Date | string
     updatedAt?: DateTimeFilter<"Shop"> | Date | string
+    image?: StringNullableFilter<"Shop"> | string | null
     orders?: OrderListRelationFilter
     vendor?: XOR<UserScalarRelationFilter, UserWhereInput>
     productId?: ProductListRelationFilter
@@ -7455,6 +7452,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrderInput | SortOrder
     _count?: ShopCountOrderByAggregateInput
     _max?: ShopMaxOrderByAggregateInput
     _min?: ShopMinOrderByAggregateInput
@@ -7469,6 +7467,7 @@ export namespace Prisma {
     address?: StringWithAggregatesFilter<"Shop"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Shop"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Shop"> | Date | string
+    image?: StringNullableWithAggregatesFilter<"Shop"> | string | null
   }
 
   export type OrderWhereInput = {
@@ -7599,7 +7598,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -7613,7 +7611,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -7627,7 +7624,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -7641,7 +7637,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -7655,7 +7650,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -7667,7 +7661,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -7679,7 +7672,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -7771,6 +7763,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     orders?: OrderCreateNestedManyWithoutShopInput
     vendor: UserCreateNestedOneWithoutShopInput
     productId?: ProductCreateNestedManyWithoutShopInput
@@ -7782,6 +7775,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutShopInput
     productId?: ProductUncheckedCreateNestedManyWithoutShopInput
   }
@@ -7791,6 +7785,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUpdateManyWithoutShopNestedInput
     vendor?: UserUpdateOneRequiredWithoutShopNestedInput
     productId?: ProductUpdateManyWithoutShopNestedInput
@@ -7802,6 +7797,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutShopNestedInput
     productId?: ProductUncheckedUpdateManyWithoutShopNestedInput
   }
@@ -7812,6 +7808,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
   }
 
   export type ShopUpdateManyMutationInput = {
@@ -7819,6 +7816,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShopUncheckedUpdateManyInput = {
@@ -7827,6 +7825,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrderCreateInput = {
@@ -7963,21 +7962,6 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8000,11 +7984,6 @@ export namespace Prisma {
     isNot?: ShopWhereInput | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type OrderOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -8014,7 +7993,6 @@ export namespace Prisma {
     email?: SortOrder
     role?: SortOrder
     address?: SortOrder
-    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     firstName?: SortOrder
@@ -8026,7 +8004,6 @@ export namespace Prisma {
     email?: SortOrder
     role?: SortOrder
     address?: SortOrder
-    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     firstName?: SortOrder
@@ -8038,7 +8015,6 @@ export namespace Prisma {
     email?: SortOrder
     role?: SortOrder
     address?: SortOrder
-    avatar?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     firstName?: SortOrder
@@ -8073,24 +8049,6 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8116,6 +8074,21 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8136,6 +8109,11 @@ export namespace Prisma {
     every?: OrderItemWhereInput
     some?: OrderItemWhereInput
     none?: OrderItemWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type OrderItemOrderByRelationAggregateInput = {
@@ -8201,6 +8179,24 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8238,6 +8234,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type ShopMaxOrderByAggregateInput = {
@@ -8246,6 +8243,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type ShopMinOrderByAggregateInput = {
@@ -8254,6 +8252,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type EnumStatusFilter<$PrismaModel = never> = {
@@ -8381,10 +8380,6 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -8463,6 +8458,10 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -8730,20 +8729,6 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8793,6 +8778,61 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -8819,47 +8859,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8939,6 +8938,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     orders?: OrderCreateNestedManyWithoutShopInput
     productId?: ProductCreateNestedManyWithoutShopInput
   }
@@ -8948,6 +8948,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutShopInput
     productId?: ProductUncheckedCreateNestedManyWithoutShopInput
   }
@@ -9001,6 +9002,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUpdateManyWithoutShopNestedInput
     productId?: ProductUpdateManyWithoutShopNestedInput
   }
@@ -9010,6 +9012,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutShopNestedInput
     productId?: ProductUncheckedUpdateManyWithoutShopNestedInput
   }
@@ -9019,6 +9022,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     orders?: OrderCreateNestedManyWithoutShopInput
     vendor: UserCreateNestedOneWithoutShopInput
   }
@@ -9029,6 +9033,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutShopInput
   }
 
@@ -9075,6 +9080,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUpdateManyWithoutShopNestedInput
     vendor?: UserUpdateOneRequiredWithoutShopNestedInput
   }
@@ -9085,6 +9091,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutShopNestedInput
   }
 
@@ -9147,7 +9154,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -9160,7 +9166,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -9237,7 +9242,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -9250,7 +9254,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -9293,7 +9296,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -9306,7 +9308,6 @@ export namespace Prisma {
     email: string
     role?: $Enums.Role
     address?: string
-    avatar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     firstName?: string
@@ -9324,6 +9325,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     vendor: UserCreateNestedOneWithoutShopInput
     productId?: ProductCreateNestedManyWithoutShopInput
   }
@@ -9334,6 +9336,7 @@ export namespace Prisma {
     address?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     productId?: ProductUncheckedCreateNestedManyWithoutShopInput
   }
 
@@ -9380,7 +9383,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -9393,7 +9395,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     address?: StringFieldUpdateOperationsInput | string
-    avatar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -9417,6 +9418,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     vendor?: UserUpdateOneRequiredWithoutShopNestedInput
     productId?: ProductUpdateManyWithoutShopNestedInput
   }
@@ -9427,6 +9429,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     productId?: ProductUncheckedUpdateManyWithoutShopNestedInput
   }
 

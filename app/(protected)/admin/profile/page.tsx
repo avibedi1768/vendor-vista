@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { CldImage } from "next-cloudinary";
 import Link from "next/link";
 import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
@@ -17,8 +16,6 @@ function Profile() {
   const [firstNameHeading, setFirstNameHeading] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [newAvatar, setNewAvatar] = useState<FormData | null>(null);
 
   const getData = async () => {
     setIsLoading(true);
@@ -37,7 +34,6 @@ function Profile() {
       if (data.user.firstName) setFirstNameHeading(data.user.firstName);
       if (data.user.lastName) setLastName(data.user.lastName);
       if (data.user.address) setAddress(data.user.address);
-      if (data.user.avatar) setAvatar(data.user.avatar);
 
       // console.log("data", data);
     } catch (error) {
@@ -51,24 +47,6 @@ function Profile() {
     getData();
   }, []);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const file = e?.target.files?.[0];
-
-    if (!file) return;
-
-    // preview
-    const previewUrl = URL.createObjectURL(file);
-    setAvatar(previewUrl);
-
-    // image
-    const formData = new FormData();
-    formData.append("file", file);
-
-    setNewAvatar(formData);
-  };
-
   const handleChange = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -80,9 +58,6 @@ function Profile() {
       formData.append("firstName", firstName);
       formData.append("lastName", lastName);
       formData.append("address", address);
-
-      const file = newAvatar?.get("file");
-      if (file) formData.append("file", file);
 
       const response = await fetch("/api/profile", {
         method: "PUT",
@@ -105,117 +80,85 @@ function Profile() {
   return isLoading ? (
     <div className="flex flex-col items-center justify-center h-[70vh] gap-4 animate-pulse text-center">
       <div className="text-3xl font-semibold text-blue-600">
-        Loading your products...
+        Loading your profile...
       </div>
       <Progress value={33} className="w-64 h-3 rounded-full bg-gray-200" />
       <p className="text-sm text-muted-foreground">Please wait a moment.</p>
     </div>
   ) : (
-    <>
-      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10 space-y-6">
-        <h1 className="text-2xl font-bold text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 px-4">
+      <div className="w-full max-w-xl p-6 bg-white rounded-xl shadow-xl space-y-6">
+        <h1 className="text-3xl font-bold text-center text-gray-800">
           Profile of {firstNameHeading || "User"}
         </h1>
-        {/* <p className="text-center text-sm text-gray-500">
-        User Email & Role are not editable.
-      </p> */}
 
         <form onSubmit={handleChange} className="space-y-5">
-          <div className="flex flex-col">
+          <div>
             <label
               htmlFor="firstname"
-              className="mb-1 text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-1"
             >
               First Name
             </label>
             <input
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="text"
               id="firstname"
+              type="text"
               value={firstName}
-              placeholder="First name"
               onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First name"
+              className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
             />
           </div>
 
-          <div className="flex flex-col">
+          <div>
             <label
               htmlFor="lastName"
-              className="mb-1 text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-1"
             >
               Last Name
             </label>
             <input
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="text"
               id="lastName"
+              type="text"
               value={lastName}
-              placeholder="Last name"
               onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last name"
+              className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
             />
           </div>
 
-          <div className="flex flex-col">
+          <div>
             <label
               htmlFor="address"
-              className="mb-1 text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-1"
             >
               Address
             </label>
             <input
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              type="text"
               id="address"
+              type="text"
               value={address}
-              placeholder="Address"
               onChange={(e) => setAddress(e.target.value)}
+              placeholder="Address"
+              className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
             />
           </div>
 
-          <div className="flex flex-col" title="non-editable">
+          <div title="non-editable">
             <label
               htmlFor="email"
-              className="mb-1 text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-1"
             >
               Email
             </label>
-            <p className="p-2 bg-gray-100 border rounded-md text-gray-600">
+            <p className="w-full px-4 py-2 bg-gray-100 border rounded-md text-gray-600">
               {user?.emailAddresses[0].emailAddress}
             </p>
           </div>
 
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="avatar"
-              className="mb-2 text-sm font-medium text-gray-700"
-            >
-              Avatar
-            </label>
-            <input
-              type="file"
-              id="avatar"
-              accept="image/*"
-              onChange={handleFileUpload}
-              className="mb-3 bg-blue-500 text-white p-2 rounded-md cursor-pointer hover:bg-blue-600 "
-            />
-            {avatar ? (
-              <div className="w-40 h-40 rounded-full overflow-hidden shadow-md">
-                <CldImage
-                  width="160"
-                  height="160"
-                  src={avatar}
-                  alt="user avatar"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            ) : (
-              <p className="text-sm text-gray-500">No avatar uploaded</p>
-            )}
-          </div>
-
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md cursor-pointer"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
           >
             Update Profile
           </button>
@@ -223,12 +166,12 @@ function Profile() {
 
         <Link
           href="/admin/dashboard"
-          className="block text-center w-full bg-violet-500 hover:bg-violet-700 text-white font-semibold py-2 rounded-md mt-4"
+          className="block text-center w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2 rounded-md transition duration-200"
         >
           Go back to Dashboard
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 

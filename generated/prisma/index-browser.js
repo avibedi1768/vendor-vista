@@ -125,7 +125,6 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   role: 'role',
   address: 'address',
-  avatar: 'avatar',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   firstName: 'firstName',
@@ -148,7 +147,8 @@ exports.Prisma.ShopScalarFieldEnum = {
   name: 'name',
   address: 'address',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  image: 'image'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
@@ -188,8 +188,7 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Status = exports.$Enums.Status = {
   PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED'
+  COMPLETED: 'COMPLETED'
 };
 
 exports.Prisma.ModelName = {

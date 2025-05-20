@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
+import { CldImage } from "next-cloudinary";
 
 function Page() {
   const { user, isLoaded } = useUser();
@@ -45,6 +46,8 @@ function Page() {
   const [shopUrl, setShopUrl] = useState("");
   const [address, setAddress] = useState("");
   const [shopName, setShopName] = useState("");
+  const [image, setImage] = useState("");
+  const [newImage, setNewImage] = useState<FormData | null>(null);
 
   const getData = useCallback(async () => {
     try {
@@ -59,6 +62,7 @@ function Page() {
 
       if (data.shop.address) setAddress(data.shop.address);
       if (data.shop.name) setShopName(data.shop.name);
+      if (data.shop.image) setImage(data.shop.image);
     } catch (error) {
       console.log(error);
     }
@@ -86,16 +90,40 @@ function Page() {
     toast.success("shop url copied to clipboard");
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const file = e?.target.files?.[0];
+
+    if (!file) return;
+
+    // preview
+    const previewUrl = URL.createObjectURL(file);
+    setImage(previewUrl);
+
+    // image
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setNewImage(formData);
+  };
+
   const handleShopChanges = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      if (!address || !shopName) return;
+      if (!address || !shopName) {
+        toast.error("Please fill all the fields");
+        return;
+      }
 
       const formData = new FormData();
 
       formData.append("address", address);
       formData.append("name", shopName);
+
+      const file = newImage?.get("file");
+      if (file) formData.append("file", file);
 
       const response = await fetch("/api/shop", {
         method: "PUT",
@@ -218,6 +246,36 @@ function Page() {
               placeholder="Enter shop name"
             />
           </div>
+
+          <div className="flex flex-col items-center">
+            <label
+              htmlFor="image"
+              className="mb-2 text-sm font-medium text-gray-700"
+            >
+              Shop Image
+            </label>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleFileUpload}
+              className="mb-3 bg-blue-500 text-white p-2 rounded-md cursor-pointer hover:bg-blue-600 "
+            />
+            {image ? (
+              <div className="w-40 h-40 rounded-full overflow-hidden shadow-md">
+                <CldImage
+                  width="160"
+                  height="160"
+                  src={image}
+                  alt="user image"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500">No image uploaded</p>
+            )}
+          </div>
+
           <Button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-700 text-white"

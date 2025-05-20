@@ -229,7 +229,7 @@ function Products() {
       <p className="text-sm text-muted-foreground">Please wait a moment.</p>
     </div>
   ) : (
-    <div className="p-6 space-y-10">
+    <div className="p-6 space-y-10 mx-auto">
       {/* Back Button */}
       <div>
         <Link

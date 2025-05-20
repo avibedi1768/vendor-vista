@@ -19,9 +19,9 @@ model User {
   email     String   @unique
   role      Role     @default(CUSTOMER)
   address   String   @default("")
-  avatar    String?
+  // avatar    String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
   firstName String   @default("")
   lastName  String   @default("")
 
@@ -39,7 +39,7 @@ model Product {
   price       Decimal
   image       String?
   stock       Int
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
 
   shopId String
   shop   Shop   @relation(fields: [shopId], references: [id])
@@ -65,8 +65,9 @@ model Shop {
   name      String   @default("")
   address   String   @default("")
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
   // metaData  Json?
+  image     String?  @default("samples/cloudinary-icon")
 
   orders    Order[]
   // products  ProductOnShop[]
@@ -121,5 +122,5 @@ enum Role {
 enum Status {
   PENDING
   COMPLETED
-  CANCELLED
+  // CANCELLED
 }
