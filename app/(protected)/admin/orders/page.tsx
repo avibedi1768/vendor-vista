@@ -26,6 +26,7 @@ interface OrderProps {
     address: string;
     firstName: string;
     lastName: string;
+    email: string;
   };
   orderItems: {
     id: string;
@@ -159,6 +160,11 @@ function Orders() {
                     </p>
                     <p className="text-sm text-muted-foreground">
                       {order.customer.address}
+                    </p>
+                    <p className="text-sm  underline text-blue-500">
+                      <Link href={`mailto:${order.customer.email}`}>
+                        {order.customer.email}
+                      </Link>
                     </p>
                   </div>
                   <span className="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-medium">
