@@ -46,6 +46,7 @@ function Page() {
   const [shopUrl, setShopUrl] = useState("");
   const [address, setAddress] = useState("");
   const [shopName, setShopName] = useState("");
+  const [shopPhone, setShopPhone] = useState("");
   const [image, setImage] = useState("");
   const [newImage, setNewImage] = useState<FormData | null>(null);
 
@@ -63,6 +64,7 @@ function Page() {
       if (data.shop.address) setAddress(data.shop.address);
       if (data.shop.name) setShopName(data.shop.name);
       if (data.shop.image) setImage(data.shop.image);
+      if (data.shop.phone) setShopPhone(data.shop.phone);
     } catch (error) {
       console.log(error);
     }
@@ -112,7 +114,13 @@ function Page() {
     e.preventDefault();
 
     try {
-      if (!address || !shopName) {
+      const phone = shopPhone.trim();
+
+      if (!phone || phone === "") return;
+
+      if (isNaN(Number(phone))) return;
+
+      if (!address || !shopName || !phone) {
         toast.error("Please fill all the fields");
         return;
       }
@@ -121,6 +129,7 @@ function Page() {
 
       formData.append("address", address);
       formData.append("name", shopName);
+      formData.append("phone", phone);
 
       const file = newImage?.get("file");
       if (file) formData.append("file", file);
@@ -244,6 +253,18 @@ function Page() {
               value={shopName}
               onChange={(e) => setShopName(e.target.value)}
               placeholder="Enter shop name"
+            />
+          </div>
+          <div className="flex flex-col text-left">
+            <label htmlFor="name" className="mb-1 font-medium">
+              Shop Phone Number
+            </label>
+            <Input
+              type="text"
+              id="name"
+              value={shopPhone}
+              onChange={(e) => setShopPhone(e.target.value)}
+              placeholder="Enter shop phone number"
             />
           </div>
 

@@ -21,6 +21,7 @@ function ShopId() {
   const [products, setProducts] = useState<Product[]>([]);
   const [address, setAddress] = useState();
   const [shopName, setShopName] = useState();
+  const [shopPhone, setShopPhone] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
   const [debounceSearchTerm] = useDebounceValue(searchTerm, 300);
@@ -35,6 +36,7 @@ function ShopId() {
 
     if (data.shop.address) setAddress(data.shop.address);
     if (data.shop.name) setShopName(data.shop.name);
+    if (data.shop.phone) setShopPhone(data.shop.phone);
   }, [shopId]);
 
   const getShopProducts = useCallback(async () => {
@@ -73,6 +75,12 @@ function ShopId() {
         </h1>
         {/* <p className="text-gray-600 text-sm">Shop ID: {shopId}</p> */}
         <p className="text-gray-500 mt-1">📍 Address: {address}</p>
+        <p className="text-gray-500 mt-1">
+          📍 Shop Phone:{" "}
+          <Link href={`tel:${shopPhone}`} className="underline">
+            {shopPhone}
+          </Link>
+        </p>
       </div>
 
       <h2 className="text-2xl font-semibold mb-4">🛍️ Products</h2>

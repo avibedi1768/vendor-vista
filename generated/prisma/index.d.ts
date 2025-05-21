@@ -3708,6 +3708,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     image: string | null
+    phone: string | null
   }
 
   export type ShopMaxAggregateOutputType = {
@@ -3717,6 +3718,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     image: string | null
+    phone: string | null
   }
 
   export type ShopCountAggregateOutputType = {
@@ -3726,6 +3728,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     image: number
+    phone: number
     _all: number
   }
 
@@ -3737,6 +3740,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     image?: true
+    phone?: true
   }
 
   export type ShopMaxAggregateInputType = {
@@ -3746,6 +3750,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     image?: true
+    phone?: true
   }
 
   export type ShopCountAggregateInputType = {
@@ -3755,6 +3760,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     image?: true
+    phone?: true
     _all?: true
   }
 
@@ -3837,6 +3843,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     image: string | null
+    phone: string | null
     _count: ShopCountAggregateOutputType | null
     _min: ShopMinAggregateOutputType | null
     _max: ShopMaxAggregateOutputType | null
@@ -3863,6 +3870,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     image?: boolean
+    phone?: boolean
     orders?: boolean | Shop$ordersArgs<ExtArgs>
     vendor?: boolean | UserDefaultArgs<ExtArgs>
     productId?: boolean | Shop$productIdArgs<ExtArgs>
@@ -3876,6 +3884,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     image?: boolean
+    phone?: boolean
     vendor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shop"]>
 
@@ -3886,6 +3895,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     image?: boolean
+    phone?: boolean
     vendor?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shop"]>
 
@@ -3896,9 +3906,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     image?: boolean
+    phone?: boolean
   }
 
-  export type ShopOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "createdAt" | "updatedAt" | "image", ExtArgs["result"]["shop"]>
+  export type ShopOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "createdAt" | "updatedAt" | "image" | "phone", ExtArgs["result"]["shop"]>
   export type ShopInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | Shop$ordersArgs<ExtArgs>
     vendor?: boolean | UserDefaultArgs<ExtArgs>
@@ -3926,6 +3937,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       image: string | null
+      phone: string | null
     }, ExtArgs["result"]["shop"]>
     composites: {}
   }
@@ -4358,6 +4370,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Shop", 'DateTime'>
     readonly updatedAt: FieldRef<"Shop", 'DateTime'>
     readonly image: FieldRef<"Shop", 'String'>
+    readonly phone: FieldRef<"Shop", 'String'>
   }
     
 
@@ -7098,7 +7111,8 @@ export namespace Prisma {
     address: 'address',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    image: 'image'
+    image: 'image',
+    phone: 'phone'
   };
 
   export type ShopScalarFieldEnum = (typeof ShopScalarFieldEnum)[keyof typeof ShopScalarFieldEnum]
@@ -7414,6 +7428,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Shop"> | Date | string
     updatedAt?: DateTimeFilter<"Shop"> | Date | string
     image?: StringNullableFilter<"Shop"> | string | null
+    phone?: StringNullableFilter<"Shop"> | string | null
     orders?: OrderListRelationFilter
     vendor?: XOR<UserScalarRelationFilter, UserWhereInput>
     productId?: ProductListRelationFilter
@@ -7426,6 +7441,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
     orders?: OrderOrderByRelationAggregateInput
     vendor?: UserOrderByWithRelationInput
     productId?: ProductOrderByRelationAggregateInput
@@ -7441,6 +7457,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Shop"> | Date | string
     updatedAt?: DateTimeFilter<"Shop"> | Date | string
     image?: StringNullableFilter<"Shop"> | string | null
+    phone?: StringNullableFilter<"Shop"> | string | null
     orders?: OrderListRelationFilter
     vendor?: XOR<UserScalarRelationFilter, UserWhereInput>
     productId?: ProductListRelationFilter
@@ -7453,6 +7470,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
     _count?: ShopCountOrderByAggregateInput
     _max?: ShopMaxOrderByAggregateInput
     _min?: ShopMinOrderByAggregateInput
@@ -7468,6 +7486,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Shop"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Shop"> | Date | string
     image?: StringNullableWithAggregatesFilter<"Shop"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Shop"> | string | null
   }
 
   export type OrderWhereInput = {
@@ -7764,6 +7783,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     orders?: OrderCreateNestedManyWithoutShopInput
     vendor: UserCreateNestedOneWithoutShopInput
     productId?: ProductCreateNestedManyWithoutShopInput
@@ -7776,6 +7796,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutShopInput
     productId?: ProductUncheckedCreateNestedManyWithoutShopInput
   }
@@ -7786,6 +7807,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUpdateManyWithoutShopNestedInput
     vendor?: UserUpdateOneRequiredWithoutShopNestedInput
     productId?: ProductUpdateManyWithoutShopNestedInput
@@ -7798,6 +7820,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutShopNestedInput
     productId?: ProductUncheckedUpdateManyWithoutShopNestedInput
   }
@@ -7809,6 +7832,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
   }
 
   export type ShopUpdateManyMutationInput = {
@@ -7817,6 +7841,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShopUncheckedUpdateManyInput = {
@@ -7826,6 +7851,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrderCreateInput = {
@@ -8235,6 +8261,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrder
+    phone?: SortOrder
   }
 
   export type ShopMaxOrderByAggregateInput = {
@@ -8244,6 +8271,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrder
+    phone?: SortOrder
   }
 
   export type ShopMinOrderByAggregateInput = {
@@ -8253,6 +8281,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrder
+    phone?: SortOrder
   }
 
   export type EnumStatusFilter<$PrismaModel = never> = {
@@ -8939,6 +8968,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     orders?: OrderCreateNestedManyWithoutShopInput
     productId?: ProductCreateNestedManyWithoutShopInput
   }
@@ -8949,6 +8979,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutShopInput
     productId?: ProductUncheckedCreateNestedManyWithoutShopInput
   }
@@ -9003,6 +9034,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUpdateManyWithoutShopNestedInput
     productId?: ProductUpdateManyWithoutShopNestedInput
   }
@@ -9013,6 +9045,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutShopNestedInput
     productId?: ProductUncheckedUpdateManyWithoutShopNestedInput
   }
@@ -9023,6 +9056,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     orders?: OrderCreateNestedManyWithoutShopInput
     vendor: UserCreateNestedOneWithoutShopInput
   }
@@ -9034,6 +9068,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     orders?: OrderUncheckedCreateNestedManyWithoutShopInput
   }
 
@@ -9081,6 +9116,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUpdateManyWithoutShopNestedInput
     vendor?: UserUpdateOneRequiredWithoutShopNestedInput
   }
@@ -9092,6 +9128,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     orders?: OrderUncheckedUpdateManyWithoutShopNestedInput
   }
 
@@ -9326,6 +9363,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     vendor: UserCreateNestedOneWithoutShopInput
     productId?: ProductCreateNestedManyWithoutShopInput
   }
@@ -9337,6 +9375,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
+    phone?: string | null
     productId?: ProductUncheckedCreateNestedManyWithoutShopInput
   }
 
@@ -9419,6 +9458,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     vendor?: UserUpdateOneRequiredWithoutShopNestedInput
     productId?: ProductUpdateManyWithoutShopNestedInput
   }
@@ -9430,6 +9470,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     productId?: ProductUncheckedUpdateManyWithoutShopNestedInput
   }
 

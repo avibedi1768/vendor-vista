@@ -113,8 +113,9 @@ export async function PUT(req: NextRequest) {
 
     const address = formData.get("address") as string | null;
     const name = formData.get("name") as string | null;
+    const phone = formData.get("phone") as string | null;
 
-    if (!address || !name) {
+    if (!address || !name || !phone) {
       return NextResponse.json(
         { error: "missing address or name" },
         { status: 400 }
@@ -126,12 +127,12 @@ export async function PUT(req: NextRequest) {
     if (file) {
       updatedShop = await prisma.shop.update({
         where: { id: userId },
-        data: { address, name, image },
+        data: { address, name, image, phone },
       });
     } else {
       updatedShop = await prisma.shop.update({
         where: { id: userId },
-        data: { address, name },
+        data: { address, name, phone },
       });
     }
 

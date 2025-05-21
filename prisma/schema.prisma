@@ -68,6 +68,7 @@ model Shop {
   updatedAt DateTime @default(now()) @updatedAt
   // metaData  Json?
   image     String?  @default("samples/cloudinary-icon")
+  phone     String?  @default("")
 
   orders    Order[]
   // products  ProductOnShop[]

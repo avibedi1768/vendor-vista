@@ -148,7 +148,8 @@ exports.Prisma.ShopScalarFieldEnum = {
   address: 'address',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  image: 'image'
+  image: 'image',
+  phone: 'phone'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
