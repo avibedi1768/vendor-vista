@@ -255,6 +255,11 @@ function Orders() {
                     <p className="text-sm text-muted-foreground">
                       {order.customer.address}
                     </p>
+                    <p className="text-sm  underline text-blue-500">
+                      <Link href={`mailto:${order.customer.email}`}>
+                        {order.customer.email}
+                      </Link>
+                    </p>
                   </div>
                   <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
                     COMPLETED
