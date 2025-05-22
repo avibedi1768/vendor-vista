@@ -27,8 +27,10 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="mt-16 text-sm text-gray-400">
+      <footer className="mt-16 text-sm text-gray-400 text-center">
         &copy; {new Date().getFullYear()} Vendor Vista. All rights reserved.
+        <br />
+        Made by Arshpreet Singh Bedi
       </footer>
     </main>
   );
